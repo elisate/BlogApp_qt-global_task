@@ -5,11 +5,11 @@ info:
   description: |
     API documentation for the BlogApp application.
   contact:
-    name: Imanariyo Baptiste
-    email: imanariyobaptiste@gmail.com
-    telphone: "+250787795163"
+    name: Dushimiyimana Elisa
+    email: dushimiyimanaelisa@gmail.com
+    telphone: "+250787239952"
 
-    url: "https://imanariyo-portfolio-web.vercel.app/"
+    url: "https://blog-app-ui-eta.vercel.app/"
 servers:
   - url: http://localhost:3000
     description: Local server
