@@ -11,8 +11,10 @@ info:
 
     url: "https://imanariyo-portfolio-web.vercel.app/"
 servers:
-  - url: http://localhost:3330
+  - url: http://localhost:3000
     description: Local server
+  - url: https://blogapp-qt-global-task.onrender.com
+    description: Deployed server
 
 tags:
   - name: Seed
