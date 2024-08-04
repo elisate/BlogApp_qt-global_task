@@ -20,10 +20,9 @@ import {
 const authRouter = express.Router()
 
 authRouter.post('/login', login)
-authRouter.post('/signup', uploadMiddleware, signup)
+authRouter.post('/signup', signup)
 authRouter.post('/forget', generateAndSendOTP)
 authRouter.post('/reset', verifyOTPAndUpdatePassword)
-authRouter.use(Authenticate)
 authRouter.get('/getAllUsers', getAllUsers)
 authRouter.post('/change', changepassword)
 authRouter.delete('/deleteUserById/:id', deleteUserById)

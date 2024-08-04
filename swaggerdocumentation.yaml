@@ -50,12 +50,6 @@ components:
         fullNames:
           type: string
           example: John Doe
-        username:
-          type: string
-          example: johndoe
-        profilePicture:
-          type: string
-          example: /media/profile-pic.jpg
         createdAt:
           type: string
           format: date-time
@@ -68,7 +62,6 @@ components:
         - email
         - password
         - fullNames
-        - username
 
     Post:
       type: object
@@ -226,14 +219,10 @@ paths:
                 fullNames:
                   type: string
                   example: John Doe
-                username:
-                  type: string
-                  example: johndoe
               required:
                 - email
                 - password
                 - fullNames
-                - username
       responses:
         '200':
           description: Successful registration
@@ -387,12 +376,7 @@ paths:
                 fullNames:
                   type: string
                   example: Jane Doe
-                username:
-                  type: string
-                  example: janedoe
-                profilePicture:
-                  type: string
-                  format: binary
+              
               required:
                 - email
                 - fullNames

@@ -1,3 +1,4 @@
+import { User } from "../models/user.js"
 export const isAdmin = async (req, res, next, userRole) => {
   const { userId } = req
 

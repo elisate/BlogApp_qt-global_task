@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
-import { AppError, catchAsync } from "../middlewares/globaleerorshandling.js";
 import { User } from "../models/user.js";
 
 dotenv.config();

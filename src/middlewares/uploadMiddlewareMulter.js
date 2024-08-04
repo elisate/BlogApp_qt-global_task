@@ -32,7 +32,6 @@ const upload = multer({ storage });
 
 // Configure the fields for different types of uploads
 export const uploadMiddleware = upload.fields([
-  { name: 'profilePicture', maxCount: 1 },
   { name: 'image', maxCount: 4 },
   { name: 'images', maxCount: 20 }
 ]);

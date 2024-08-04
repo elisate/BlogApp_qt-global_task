@@ -1,9 +1,4 @@
-import cron from "node-cron";
-import express from "express";
-import fs from "fs";
-import multer from "multer";
-import path from "path";
-import { fileURLToPath } from "url";
+
 import { catchAsync } from "../middlewares/globaleerorshandling.js";
 import { models } from "../models/index.js";
 import { generateOTP, sendEmail, signupHtmlMessage } from "../utils/index.js";
@@ -11,25 +6,6 @@ import { passHashing, tokengenerating } from "../utils/index.js";
 
 const { Comment, Post, User } = models;
 
-
-
-// Schedule user deletion
-const scheduleUserDeletion = (userId, signupTime) => {
-  const deletionTime = new Date(signupTime.getTime() + 3 * 60 * 1000); // 3 minutes later
-  const cronExpression = `${deletionTime.getMinutes()} ${deletionTime.getHours()} * * *`;
-
-  cron.schedule(cronExpression, async () => {
-    try {
-      const user = await models.User.findOne({ where: { id: userId } });
-      if (user && !user.verified) {
-        await models.User.destroy({ where: { id: userId } });
-        console.log(`Deleted unverified user with ID: ${userId}`);
-      }
-    } catch (error) {
-      console.error('Error deleting unverified user:', error.message);
-    }
-  });
-};
 
 // Signup route
 export const signup = catchAsync(async (req, res, next) => {
@@ -69,7 +45,6 @@ export const signup = catchAsync(async (req, res, next) => {
     }
   });
 
-  scheduleUserDeletion(newUser.id, newUser.createdAt);
 });
 
 

@@ -1,25 +1,35 @@
 import { models } from "../models/index.js";
 
 const { Comment, Post, User } = models;
-
 export const addComment = async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.postId);
-    if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
+    // Log req.user to debug
+    console.log("Request User:", req.user);
+
+    // Check if the user is authenticated
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "User not authenticated" });
     }
 
+    const post = await Post.findByPk(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Create the comment
     const comment = await Comment.create({
       content: req.body.content,
-      authorId: req.user.id,
-      postId: req.params.postId
+      authorId: req.user.id, // Use the authenticated user's ID
+      postId: req.params.postId,
     });
 
     res.status(201).json(comment);
   } catch (error) {
+    console.error("Error adding comment:", error); // Log the error for debugging
     res.status(500).json({ error: error.message });
   }
 };
+
 
 export const getComments = async (req, res) => {
   try {

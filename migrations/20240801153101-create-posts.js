@@ -1,90 +1,45 @@
-'use strict';
+import { DataTypes } from "sequelize";
 
-export async function up(queryInterface, Sequelize) {
-  await queryInterface.createTable('Posts', {
+export const up = async (queryInterface) => {
+  await queryInterface.createTable("Posts", {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      allowNull: false,
     },
     title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     content: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    authorId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Users', // Reference to the 'Users' table
-        key: 'id',
-      },
-      onDelete: 'CASCADE', // Cascade delete posts if the user is deleted
-      allowNull: false,
+    authorname: {
+      type: DataTypes.TEXT, // Make sure this is included
+      allowNull: true,
     },
-    images: {
-      type: Sequelize.ARRAY(Sequelize.STRING), // Array to store image URLs
+    image: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
     createdAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.NOW,
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
-  });
-
-  // Create a comments table for comments related to posts
-  await queryInterface.createTable('Comments', {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false,
-    },
-    content: {
-      type: Sequelize.TEXT,
-      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     authorId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Users', // Reference to the 'Users' table
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    postId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Posts', // Reference to the 'Posts' table
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
-      allowNull: false,
-    },
-    createdAt: {
-      type: Sequelize.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
-    updatedAt: {
-      type: Sequelize.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
     },
   });
-}
-export async function down(queryInterface, Sequelize) {
-  // Drop the Comments table before dropping the Posts table
-  await queryInterface.dropTable('Comments');
-  await queryInterface.dropTable('Posts');
-}
+};
+
+export const down = async (queryInterface) => {
+  await queryInterface.dropTable("Posts");
+};

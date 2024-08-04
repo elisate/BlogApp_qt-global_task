@@ -9,6 +9,7 @@ import yaml from "yamljs";
 import { sequelize } from "./config/config.js";
 import { syncDB } from "./config/syncDB .js";
 import { seedDatabase } from "./src/controllers/seederController.js";
+import cors from "cors";
 
 // Load environment variables
 dotenv.config()
@@ -18,7 +19,7 @@ const port = process.env.server_PORT || 3000
 
 // Middleware to parse JSON
 app.use(express.json())
-
+app.use(cors());
 // Swagger UI setup
 const swaggerDocument = yaml.load('./swaggerdocumentation.yaml')
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
