@@ -8,6 +8,8 @@ const CommentRouter = express.Router();
 CommentRouter.get('/:postId', getComments);
 CommentRouter.get('/comment/:id', getCommentById);
 CommentRouter.put('/comment/:id',   updateComment);
+CommentRouter.get('/getcomments', getComments);
+CommentRouter.get("/:postId/comments", getComments);
 
 CommentRouter.use(Authenticate);
 CommentRouter.post('/:postId',   addComment);

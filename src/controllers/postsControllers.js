@@ -15,7 +15,7 @@ const { Comment, Post, User } = models;
 
 export const createPost = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, authorname } = req.body;
     if (!title || !content) {
       return res
         .status(400)
@@ -25,6 +25,7 @@ export const createPost = async (req, res) => {
     const postData = {
       title,
       content,
+      authorname,
       authorId: req.user.id, // Ensure the user is authenticated
     };
 

@@ -35,14 +35,13 @@ export const getComments = async (req, res) => {
   try {
     const comments = await Comment.findAll({
       where: { postId: req.params.postId },
-      include: [{ model: User, as: 'author', }] // Assuming you have a User model with name and email fields
+      include: [{ model: User, as: "author" }],
     });
     res.status(200).json(comments);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-
 export const getCommentById = async (req, res) => {
   try {
     const comment = await Comment.findByPk(req.params.id, {
